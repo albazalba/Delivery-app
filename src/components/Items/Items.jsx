@@ -5,17 +5,19 @@ import data from './data'
 
 const Items = () => {
     const { items } = data;
+    
     return (
         <ItemsContainer>
             <h3>Best sellers</h3>
-            {items.map((item) => (
-                <ItemCard key={item.id} 
-                highlight={item.highlight}
-                itemName={item.name}
-                price={item.price}
-                desc={item.description}
-                img={item.image} />
-            ))}
+                {items.map((item) => (
+                    <ItemCard key={item.id} 
+                    item={item}
+                    highlight={item.highlight}
+                    itemName={item.name}
+                    price={item.price}
+                    desc={item.description}
+                    img={item.image} />
+                ))}
         </ItemsContainer>
     )
 }

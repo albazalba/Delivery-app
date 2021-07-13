@@ -1,23 +1,26 @@
 import React from 'react'
 import {AiFillStar} from 'react-icons/ai'
 import styled from '@emotion/styled'
+import { useCart } from 'react-use-cart'
 
-const TEXT_COLOR_LIGHT = "#535665";
 const ItemCard = (props) => {
+    const { addItem, items, updateItemQuantity } = useCart();
+    const { highlight, itemName, price, desc, img } = props;
+    console.log(items)
     return (
         <ItemCardContainer>
             <div className='left'>
-                <span className='highlight'> <AiFillStar /> {props.highlight}</span>
-                <h4>{props.itemName}</h4>
-                <span className="price">{props.price}</span>
-                <span className="desc">{props.desc}</span>
+                <span className='highlight'> <AiFillStar /> {highlight}</span>
+                <h4>{itemName}</h4>
+                <span className="price">{price}</span>
+                <span className="desc">{desc}</span>
             </div>
             <div className="right">
                 <div className="image-container">
-                    <img  src={props.img} alt="item" />
-                <div className="btn-container">
-                    <button className='add-btn'>ADD</button>
-                </div>
+                    <img  src={img} alt="item" />
+                    <div className="btn-container">
+                        <button onClick={()=>addItem(props.item)} className="add-btn">Add</button>
+                    </div> 
                 </div>
             </div>
         </ItemCardContainer>
@@ -35,7 +38,7 @@ const ItemCardContainer = styled.div`
         width: 80%;
         opacity: .2;
         height: 0.5px;
-        background-color: ${TEXT_COLOR_LIGHT};
+        background-color: ;
         position: absolute;
         left: 50%;
         transform: translateX(-50%);
@@ -104,10 +107,16 @@ const ItemCardContainer = styled.div`
                 font-size:11px;
                 padding:5px 10px;
                 box-sizing: border-box;
-                opacity: .9;
+                /* opacity: .9; */
                 &:hover{
                     opacity: 1;
-                }  
+                } 
+            } 
+            .item-quantity{
+                display: block;
+                background-color: white;
+                color: #EE5046;
+                font-size: 9px;
                 
             }
             

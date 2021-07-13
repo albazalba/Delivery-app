@@ -2,20 +2,27 @@ import React from 'react'
 import {FiHome, FiShoppingCart} from 'react-icons/fi'
 import {BsPerson} from 'react-icons/bs'
 import styled from '@emotion/styled'
-import {NavLink} from 'react-router-dom'
+import {useRouteMatch, NavLink} from 'react-router-dom'
 import homeIcon from '../../img/homeIcon.svg'
-import profile from '../../img/profile.svg'
-import cart from '../../img/cart.svg'
+import inactiveHomeIcon from '../../img/inactiveHome.svg'
+import cartActive from '../../img/cartActive.svg'
+import cartInactive from '../../img/cartInactive.svg'
+import accountActive from '../../img/accountActive.svg'
+import accountInactive from '../../img/accountInactive.svg'
 import { textLight } from '../../Styles/themes'
 
 const Navbar = () => {
+    let homeMatch = useRouteMatch("/home");
+    let cartMatch =useRouteMatch("/orders");
+    let accountMatch = useRouteMatch("/account")
+    console.log(homeMatch);
+    console.log(cartMatch)
     return (
         <NavbarContainer>
             <NavLink to='/home' style={{textDecoration:'none', color:'grey' }} 
             activeStyle={{fontWeight: "bold", color: "#EE5046" }}>
             <div className='home'>
-                {/* <img src={homeIcon} /> */}
-                <FiHome size={"20px"} />
+                {homeMatch ? <img className="icon" src={homeIcon} /> : <img className="icon" src={inactiveHomeIcon} /> }
                 <span>Home</span>
             </div>
             </NavLink>
@@ -23,14 +30,14 @@ const Navbar = () => {
             <NavLink to='/orders' style={{textDecoration:'none', color:'grey'}}
             activeStyle={{fontWeight: "bold", color: "#EE5046" }}>
                 <div className='orders'>
-                    <FiShoppingCart size={"20px"} />
+                    {cartMatch ? <img className="icon" src={cartActive} /> : <img className="icon" src={cartInactive} />}
                     <span>Orders</span>
                 </div>
             </NavLink>
             <NavLink to='/account' style={{textDecoration:'none', color:'grey'}}
             activeStyle={{fontWeight: "bold", color: "#EE5046" }}>
                 <div className='account'>
-                    <BsPerson size={"20px"} />
+                    {accountMatch ? <img className="icon" src={accountActive} /> : <img className="icon" src={accountInactive} />}
                     <span>Account</span>
                 </div>
             </NavLink>
@@ -57,17 +64,29 @@ const NavbarContainer = styled.div`
         flex-flow: column;
         align-items: center;
         background-color: white;
+        .icon{
+            background-color: white;
+            height: 20px;
+        }
         
      }
     .orders{
         display: flex;
         flex-flow: column;
         align-items: center;
+        .icon{
+            background-color: white;
+            height: 20px;
+        }
     }
     .account{
         display: flex;
         flex-flow: column;
         align-items: center;
+        .icon{
+            background-color: white;
+            height: 20px;
+        }
     }`;
 
 export default Navbar

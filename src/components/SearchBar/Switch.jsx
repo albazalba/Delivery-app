@@ -14,7 +14,7 @@ const Switch = () => {
 const SwitchContainer = styled.label`
     position: relative;
     display: inline-block;
-    width: 30px;
+    width: 25px;
     height: 5px;
     background-color: #CDCFD9;
     margin-left: 5px;
@@ -50,7 +50,7 @@ input:checked + .slider{
 }
 
 input:checked + .slider:before{
-    transform: translateX(20px);
-}`
+    transform: translateX(12.5px);
+}`;
 
 export default Switch

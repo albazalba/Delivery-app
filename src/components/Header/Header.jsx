@@ -3,7 +3,7 @@ import Offer from './Offer'
 import styled from '@emotion/styled'
 import star from '../../img/Star.svg'
 import background from '../../img/background.jpg'
-import { textLight, textExtraLight, themeRed } from '../../Styles/themes'
+import { TEXT_LIGHT, TEXT_EXTRA_LIGHT, THEME_RED } from '../../Styles/themes'
 
 const Header = () => {
     return (
@@ -12,14 +12,16 @@ const Header = () => {
                 <h1>Burger king</h1>
                 <span className='address'>RMV 2nd Stage, Sanjay Nagar</span><br />
                 <span className='category'>America, Fast Food</span>
-                <div className="reviews-box">
-                    <div className="review-texts">
-                        <img src={star} alt="reviews" />3.2 <br /> Reviews
+                <div className="sidestick-container">
+                    <div className="reviews-box">
+                        <div className="review-texts">
+                            <img src={star} alt="reviews" />3.2 <br /> Reviews
+                        </div>
                     </div>
-                </div>
-                <div className="photos-box">
-                    <div className="review-texts">
-                          11<br />Photos
+                    <div className="photos-box">
+                        <div className="review-texts">
+                            11<br />Photos
+                        </div>
                     </div>
                 </div>
             </div>        
@@ -45,7 +47,42 @@ const HeaderContainer = styled.div`
         padding-bottom: 15px;
         top: 0;
         border-bottom: 1px dotted rgb(71, 71, 71) ;
-    } 
+        .sidestick-container{
+        display: flex;
+        flex-flow: column;
+        position: absolute;
+        justify-content: center;
+        align-items: flex-end;
+        right: 0;
+        top: 0;
+        margin-top: 5px;
+        width: 100px;
+        height: 100px;
+        .reviews-box, .photos-box{ 
+            display: flex;
+            flex-flow: column;
+            justify-content: start;
+            justify-content: space-between;
+            /* align-items: center; */
+            /* position: absolute; */
+            border: 1px;
+            border-radius: 10px 0 0 10px;
+            background-color: #EE5046;
+            color: white; 
+            margin-top: 5px;
+            width: 63px;
+            height: 35px;
+            font-size: 9px;
+            .review-texts{
+                padding: 4px 9px;
+                text-align: start;
+                img{
+                    height: 10px;
+                }
+            }
+
+        }
+    }
     h1{
         color: rgb(71, 71, 71);
         font-size: 16px;
@@ -53,41 +90,19 @@ const HeaderContainer = styled.div`
         text-transform: uppercase;
     }
     .address{
-        color: ${textLight};
-        font-size: 11px;
+        color: ${TEXT_LIGHT};
+        font-size: 9px;
     }
     .category{
-        color: $text-color-light;
+        color: ${TEXT_LIGHT};
         font-size: 9px;
-    }
-    .reviews-box, .photos-box{ 
-        display: flex;
-        flex-flow: column;
-        justify-content: start;
-        /* align-items: center; */
-        position: absolute;
-        border: 1px;
-        border-radius: 10px 0 0 10px;
-        background-color: #EE5046;
-        color: white;
-        right: -5px;    
-        top: 10px;
-        width: 63px;
-        height: 35px;
-        font-size: 9px;
-        .review-texts{
-            padding: 4px 9px;
-            text-align: start;
-            img{
-                height: 10px;
-            }
-        }
-
     }
     .photos-box{
         top: 50px;
         background-image: url(${background});
     }
+    }
+    
 }
 
 
@@ -114,18 +129,18 @@ const HeaderContainer = styled.div`
             font-weight: 600;
             font-size: 9.98249px;
             line-height: 15px;
-            /* color: ${textLight}; */
+            /* color: ${TEXT_LIGHT}; */
             img{
-                /* display: inline-block; */
+                display: inline-block; 
                 position: absolute;
                 height: 11px;
                 left: -8px;
-                top: 2.5px;
+            top: 2.5px;
             }
         }
         p{
             font-size: 7px;
-            color: ${textExtraLight};
+            color: ${TEXT_EXTRA_LIGHT};
         }
     }`;
 
