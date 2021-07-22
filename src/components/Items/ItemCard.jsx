@@ -2,15 +2,18 @@ import React from 'react'
 import {AiFillStar} from 'react-icons/ai'
 import styled from '@emotion/styled'
 import { useCart } from 'react-use-cart'
+import vegIcon from '../../img/vegIcon.svg'
+import nonVegIcon from '../../img/nonVegIcon.svg'
+import CartButton from '../Reusable/CartButton'
+
 
 const ItemCard = (props) => {
     const { addItem, items, updateItemQuantity } = useCart();
-    const { highlight, itemName, price, desc, img } = props;
-    console.log(items)
+    const { highlight, itemName, price, desc, img, isVeg, addToCart, cartCount, handleCartReduce } = props;
     return (
         <ItemCardContainer>
             <div className='left'>
-                <span className='highlight'> <AiFillStar /> {highlight}</span>
+                <span className='highlight'><img src={isVeg ? vegIcon : nonVegIcon} /> <AiFillStar /> {highlight}</span>
                 <h4>{itemName}</h4>
                 <span className="price">{price}</span>
                 <span className="desc">{desc}</span>
@@ -19,8 +22,13 @@ const ItemCard = (props) => {
                 <div className="image-container">
                     <img  src={img} alt="item" />
                     <div className="btn-container">
-                        <button onClick={()=>addItem(props.item)} className="add-btn">Add</button>
-                    </div> 
+                        {cartCount>0 
+                        ? <CartButton 
+                           cartCount={cartCount}
+                           handleCartReduce={handleCartReduce}
+                           handleCartAdd={addToCart} /> 
+                        : <button className="add-btn" onClick={addToCart}>ADD</button>}
+                    </div>    
                 </div>
             </div>
         </ItemCardContainer>
@@ -37,8 +45,7 @@ const ItemCardContainer = styled.div`
         bottom: 0;
         width: 80%;
         opacity: .2;
-        height: 0.5px;
-        background-color: ;
+        height: 0.5px; 
         position: absolute;
         left: 50%;
         transform: translateX(-50%);
@@ -97,6 +104,7 @@ const ItemCardContainer = styled.div`
                 display: flex;
                 justify-content: center;
                 align-items: center;
+                /* background-color: white; */
                 .add-btn{
                 background-color: white;
                 text-transform: uppercase;

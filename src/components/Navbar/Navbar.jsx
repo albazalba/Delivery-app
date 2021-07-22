@@ -22,7 +22,7 @@ const Navbar = () => {
             <NavLink to='/home' style={{textDecoration:'none', color:'grey' }} 
             activeStyle={{fontWeight: "bold", color: "#EE5046" }}>
             <div className='home'>
-                {homeMatch ? <img className="icon" src={homeIcon} /> : <img className="icon" src={inactiveHomeIcon} /> }
+            <img className="icon" src={homeMatch ? homeIcon : inactiveHomeIcon} />
                 <span>Home</span>
             </div>
             </NavLink>
@@ -30,14 +30,14 @@ const Navbar = () => {
             <NavLink to='/orders' style={{textDecoration:'none', color:'grey'}}
             activeStyle={{fontWeight: "bold", color: "#EE5046" }}>
                 <div className='orders'>
-                    {cartMatch ? <img className="icon" src={cartActive} /> : <img className="icon" src={cartInactive} />}
+                    <img className="icon" src={cartMatch ? cartActive : cartInactive} />
                     <span>Orders</span>
                 </div>
             </NavLink>
             <NavLink to='/account' style={{textDecoration:'none', color:'grey'}}
             activeStyle={{fontWeight: "bold", color: "#EE5046" }}>
                 <div className='account'>
-                    {accountMatch ? <img className="icon" src={accountActive} /> : <img className="icon" src={accountInactive} />}
+                    <img className="icon" src={accountMatch ? accountActive : accountInactive} />            
                     <span>Account</span>
                 </div>
             </NavLink>

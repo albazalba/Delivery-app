@@ -41,8 +41,7 @@ const Menu = () => {
     return (
         <>
         <Overlay style={{ display: open ? "block" : "none" }}/>
-            <MenuContainer>
-                
+        {open ? <MenuContainer>
                 <div className={open ? "menu-container-open" : "menu-container-close" }>
                     {items.map((item) => (
                         <MenuItems key={item.id} 
@@ -50,10 +49,11 @@ const Menu = () => {
                         quantity = {item.quantity} />
                     ))}
                 </div>
-                
+                </MenuContainer>
+            : null}
+            <ButtonContainer>
                 <button className={open ? "btn-close" : "btn-open"} onClick={() => toggle()} >{open ? 'Close' : 'Menu'}</button>
-            </MenuContainer>
-
+            </ButtonContainer>
         </>
     )
 }
@@ -77,19 +77,6 @@ const MenuContainer = styled.div`
     justify-content: center;
     flex-flow: column;
     align-items: center;
-    .btn-close, .btn-open{
-        border: none;
-        width: 90px;
-        height: 30px;
-        color: white;
-        border-radius: 200px;
-    }
-    .btn-close{
-        background-color: grey;
-    }
-    .btn-open{
-        background-color: #5890D4;
-    }
     .menu-container-open, .menu-container-close{
         width: 226.62px;
         height: 100%;
@@ -129,7 +116,31 @@ const MenuContainer = styled.div`
                 height: 0;
                 width: 0;
             }
+        }
+    }       
+`
+
+const ButtonContainer = styled.div`
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    bottom: 60px;
+    z-index: 2;
+    .btn-close, .btn-open{
+        border: none;
+        width: 90px;
+        height: 30px;
+        color: white;
+        border-radius: 200px;
+    }
+    .btn-close{
+        background-color: grey;
+    }
+    .btn-open{
+        background-color: #5890D4;
     }
 `
+
 
 export default Menu

@@ -5,10 +5,10 @@ import styled from '@emotion/styled'
 
 const TEXT_COLOR_LIGHT = "#535665";
 
-const Searchbar = () => {
+const Searchbar = (props) => {
     return (
         <SearchbarContainer>
-            <span className="searchbar-left">Veg only <Switch /></span>
+            <span className="searchbar-left">Veg only <Switch changeVegFilter={props.handleVegFilter} /></span>
             <div className='search-icon'>
                   <BsSearch />    
             </div>            

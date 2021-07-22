@@ -3,15 +3,12 @@ import styled from '@emotion/styled'
 import ArrowIcon from '../../img/ArrowRight.png'
 import RetaurantImg from '../../img/leonGrill.svg'
 import Suggestion from '../../img/suggestion.svg'
-import { useCart } from 'react-use-cart';
 import { PRIMARY, TEXT_LIGHT } from '../../Styles/themes'
+import CartButton from '../Reusable/CartButton'
 
-const Orders = () => {
-    const { isEmpty, totalUniqueItems, items, totalItems, cartTotal, updateItemQuantity, removeItem, emptyCart } = useCart();
-    var taxes = Math.round(( 5 / 100 ) * cartTotal).toFixed(2);
-    let itemTotal = Math.round(cartTotal + taxes).toFixed(2);
-
-    console.log(taxes);
+const Orders = ( {cart, addToCart, handleCartReduce, totalItems, itemTotal, taxes, subTotal} ) => {
+    // let taxes = parseInt(Math.round(( 5 / 100 ) * cartTotal).toFixed(2));
+    // let itemTotal = parseInt(Math.round(cartTotal + taxes).toFixed(2));
     return (
         <OrderPage>
             <div className="page-header">
@@ -22,22 +19,23 @@ const Orders = () => {
                         <span className="restaurant-name">Leon Grill</span><br/>
                         <span className="restaurant-address">Sanjay Nagar, New BEL Road</span>
                     </div>
-                    <span className="item-count">{totalUniqueItems} Items</span>
+                    <span className="item-count">{totalItems} Items</span>
                 </div>
             </div>
             <div className="cart-items">
-                {items.map((item, index) => {
+                {cart.map((item, index) => {
                 return(
                     <div className="cart-item-container">
                         <div className="container-left">
                             <span className="item-name">{item.name}</span>
                         </div>
                         <div className="container-right">
-                            <div className="btn-container" key={item.id}>
-                                <button style={{color: item.quantity === 1 ? "grey" : "#EE5046"}} className="reduce-btn" onClick={() => updateItemQuantity(item.id, item.quantity - 1 )}>-</button>
-                                <span className="item-quantity" >{item.quantity}</span>
-                                <button className="increase-btn" onClick={() => updateItemQuantity(item.id, item.quantity + 1 )}>+</button>
-                            </div> 
+                            <div className="btn-container">
+                                <CartButton
+                                handleCartAdd={()=>addToCart(item)}
+                                cartCount={item.cartCount}
+                                handleCartReduce={() => handleCartReduce(item)} />
+                                </div>
                             <span className="item-price">{item.price}</span>
                         </div>
                     </div>  
@@ -52,20 +50,20 @@ const Orders = () => {
                 <span className="cart-total-header">Bill Details</span>
                 <div className="cart-total-details">
                     <span className="item-total">Item total</span>
-                    <span className="total-amount">${cartTotal}</span>
+                    <span className="total-amount">${itemTotal}</span>
                 </div>
                 <div className="cart-total-details">
                     <span className="item-total">taxes and charges</span>
                     <span className="total-amount">${taxes}</span>
                 </div>
                 <div className="cart-grand-total">
-                    <span style={{fontWeight:600}} className="item-total">Item total</span>
-                    <span style={{fontWeight:600}} className="total-amount">${itemTotal}</span>
+                    <span style={{fontWeight:600}} className="item-total">Sub total</span>
+                    <span style={{fontWeight:600}} className="total-amount">${subTotal}</span>
                 </div>              
             </div>
             <div className="cart-bottom">
                 <div className="bottom-left">
-                    <span className="bottom-price">Rs{cartTotal}</span>
+                    <span className="bottom-price">Rs {subTotal}</span>
                     <span className="bottom-text">View detailed text</span>
                 </div>
                 <button className="bottom-right">
@@ -144,32 +142,10 @@ const OrderPage = styled.div`
             }
             .container-right{
                 display: flex;
+                justify-content: center;
+                align-items: center;
                 .btn-container{
-                    margin: 0 10px;
-                    border: 1px solid #D2D2D6;
-                    border-radius: 3px;
-                    padding: 0 8px;
-                    width: 55px;
-                    height: 25px;
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: center;
-                    .reduce-btn, .increase-btn {
-                        border: none;
-                        color: ${PRIMARY};
-                        font-size: 20px;
-                        background-color: white;
-                        
-                    }
-                    .reduce-btn{
-                        bottom: 3.5px;
-                        font-weight: 600;
-                    }
-                    .item-quantity{
-                        color: ${PRIMARY};
-                        font-size: 13px;
-                    }
-
+                    margin-right: 10px;
                 }
             }
             .item-price{

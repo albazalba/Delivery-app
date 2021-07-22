@@ -5,12 +5,17 @@ import Items from '../components/Items/Items'
 import styled from '@emotion/styled'
 import Menu from '../components/Menu/Menu'
 
-const Home = () => {
+const Home = ({filteredItem, cart, handleVegFilter, addToCart, handleCartReduce, cartCount}) => {
     return (
         <HomeContainer >
             <Header />
-            <Searchbar />
-            <Items />
+            <Items 
+            filteredItem={filteredItem}
+            cart={cart}
+            handleVegFilter={handleVegFilter}
+            addToCart={addToCart}
+            handleCartReduce={handleCartReduce}
+            cartCount={cartCount} />
             <Menu />
         </HomeContainer>
     )
