@@ -1,15 +1,31 @@
-import React from 'react'
+import React, {useState} from 'react'
 import styled from '@emotion/styled'
 import Img from '../../img/ArrowRight.png'
+import { useAuth } from '../../context/AuthContext'
+import { useHistory } from 'react-router-dom'
 
 const Account = () => {
+    const [error, setError] = useState("")
+    const {currentUser, logout} = useAuth()
+    const history = useHistory()
+
+    async function handleLogout(){
+        setError('')
+        try{
+            await logout()
+            history.push('/login')
+        } catch {
+            setError('failer to logout')
+        }
+    }
+
     return (
         <main>
         <Cover />
         <AccountPage>
                 <div className="profile-head">
                     <img className="profile-image" src="https://static.toiimg.com/thumb/msid-76729750,width-1200,resizemode-4/76729750.jpg" alt="Profile" />
-                    <span className="profile-name">Thomas Shelby<br />
+                    <span className="profile-name">{currentUser.email}<br />
                     <span className="place">United Kingdom</span>
                     </span>
                 </div>
@@ -50,8 +66,7 @@ const Account = () => {
                         <img src={Img} alt="Change Bio"></img>
                     </div>
                     <div className="profile-setting">
-                        <a href="#">Logout</a>
-                        <img src={Img} alt="Change Bio"></img>
+                        <button onClick={handleLogout}>Logout</button>
                     </div>
                 </div>
             </AccountPage>
@@ -77,7 +92,7 @@ const AccountPage = styled.div`
     border-top-right-radius: 30px;
     position: relative;
     background-color: white;
-    margin-bottom: 20px;
+    padding-bottom: 40px;
     .profile-head{
         display: flex;
         width: 100%;
@@ -149,6 +164,14 @@ const AccountPage = styled.div`
             img{
                 height: 13px;
                 color: #b3b2b2;
+                margin-right: 35px;
+            }
+            button{
+                border: none;
+                background-color: #ea384d;
+                color: white;
+                padding: 9px 16px;
+                width: 100%;
                 margin-right: 35px;
             }
         }        

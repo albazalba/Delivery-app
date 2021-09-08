@@ -5,7 +5,7 @@ import Items from '../components/Items/Items'
 import styled from '@emotion/styled'
 import Menu from '../components/Menu/Menu'
 
-const Home = ({filteredItem, cart, handleVegFilter, addToCart, handleCartReduce, cartCount}) => {
+const Home = ({filteredItem, cart, handleVegFilter, addToCart, handleCartReduce, cartCount, onSearch, searchItem}) => {
     return (
         <HomeContainer >
             <Header />
@@ -15,10 +15,12 @@ const Home = ({filteredItem, cart, handleVegFilter, addToCart, handleCartReduce,
             handleVegFilter={handleVegFilter}
             addToCart={addToCart}
             handleCartReduce={handleCartReduce}
-            cartCount={cartCount} />
+            cartCount={cartCount}
+            onSearch={onSearch}
+            searchItem={searchItem} />
             <Menu />
         </HomeContainer>
-    )
+        )
 }
 
 const HomeContainer = styled.div`

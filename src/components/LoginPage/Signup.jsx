@@ -2,26 +2,28 @@ import styled from '@emotion/styled'
 import React, { useRef, useState } from 'react'
 import Arrow from '../../img/ArrowRight.png'
 import { useAuth } from '../../context/AuthContext'
-import {Link, useHistory} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 
-const LoginPage = () => {
+const Signup = () => {
     const emailRef = useRef()
     const passwordRef =useRef()
-    const { login } = useAuth()
+    const passwordConfirmRef = useRef()
+    const { signup } = useAuth()
     const [error, setError] = useState('')
     const [loading, setLoading] = useState(false)
-    const history = useHistory()
 
 async function handleSubmit(e) {
     e.preventDefault()
 
+    if (passwordRef.current.value !== passwordConfirmRef.current.value) {
+        return setError('passwords do not mathc')
+    }
     try {
         setLoading(true)
         setError('')
-        await login(emailRef.current.value, passwordRef.current.value, )
-        history.push("/home")
+        await signup(emailRef.current.value, passwordRef.current.value, passwordConfirmRef.current.value)
     }catch {
-        setError('Failed to sign in')
+        setError('Failed to create an account')
     } 
     setLoading(false)
 }
@@ -30,19 +32,17 @@ async function handleSubmit(e) {
         <PageContainer>
             <div className="page-header">
                 <a href="#"><img src={Arrow} alt="Back" /></a>
-                <h2>Login</h2>
-                <span className="message">Enter your login credentials.</span>
+                <h2>Sign Up</h2>
+                <span className="message">Enter your details to Signup.</span>
             </div>
-            {error && <span>{error}</span>}
+            {error && <div className="error-container"><span className="error">{error}</span></div>}
             <form className="input-part" onSubmit={handleSubmit}>
                 <input placeholder="E-mail" type="text" ref={emailRef} />
                 <input placeholder="Password" type="password" ref={passwordRef} />
-                <button className="btn" type="submit">Login</button>
-            </form>
-            <div className="signup">
-                <div>Need an account? <Link to='/Signup'>Sign up</Link></div>    
-                <Link to='/forgotpassword'><div> Forgot password</div></Link> 
-            </div>
+                <input placeholder="Confirm password" type="password" ref={passwordConfirmRef}  />
+                <button className="btn" type="submit">Continue</button>
+            </form>     
+            <div className="login">Already have an accoount? <Link to='/login'>Login</Link></div> 
             </PageContainer>
     )
 }
@@ -68,6 +68,19 @@ const PageContainer = styled.div`
        .message{
            font-size:13px ;
            color: #7D808C;
+       }
+   }
+   .error-container{
+       display: flex;
+       justify-content: center;
+       margin: 10px 0;
+    color: #737373;
+       .error{
+        text-align: center;
+        /* border: 1px solid; */
+        width: 75%;
+        padding: 10px;
+        background: #ff000017;
        }
    }
    .input-part{
@@ -98,15 +111,12 @@ const PageContainer = styled.div`
            background: #EE5046;
        }
    }
-   .signup{
-       display: flex;
-       align-items: center;
-       flex-flow:column;
+   .login{
         margin:10px;
         color: #7D808C;
-        font-size: 12px;
+        text-align: center;
    }
    `
 
 
-export default LoginPage
+export default Signup

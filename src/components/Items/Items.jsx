@@ -5,14 +5,20 @@ import data from './data'
 import Searchbar from '../SearchBar/Searchbar'
 
 // const cartFromLocalStorage = JSON.parse(localStorage.getItem('cart'))
-const Items = ( {filteredItem, handleVegFilter, addToCart, handleCartReduce,} ) => {
+const Items = ( {filteredItem, handleVegFilter, addToCart, handleCartReduce, onSearch, searchItem} ) => {
     
     return (
         <>
-            <Searchbar handleVegFilter={handleVegFilter} />
+            <Searchbar handleVegFilter={handleVegFilter} onSearch={onSearch} searchItem={searchItem} />
             <ItemsContainer>
                 <h3>Best sellers</h3>
-                    {filteredItem.map((item) => (
+                    {filteredItem.filter((item) => {
+                        if(searchItem == "") {
+                            return item
+                        } else if(item.name.toLowerCase().includes(searchItem.toLowerCase())) {
+                            return item
+                        }
+                    }).map((item) => (
                         <ItemCard key={item.id} 
                         isVeg={item.isVeg}
                         highlight={item.highlight}

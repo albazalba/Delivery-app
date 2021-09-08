@@ -1,16 +1,20 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import {AiFillStar} from 'react-icons/ai'
 import styled from '@emotion/styled'
 import { useCart } from 'react-use-cart'
 import vegIcon from '../../img/vegIcon.svg'
 import nonVegIcon from '../../img/nonVegIcon.svg'
 import CartButton from '../Reusable/CartButton'
+import { CartContext, CartProvider } from '../../context/CartContext'
+
 
 
 const ItemCard = (props) => {
     const { addItem, items, updateItemQuantity } = useCart();
     const { highlight, itemName, price, desc, img, isVeg, addToCart, cartCount, handleCartReduce } = props;
+    
     return (
+        
         <ItemCardContainer>
             <div className='left'>
                 <span className='highlight'><img src={isVeg ? vegIcon : nonVegIcon} /> <AiFillStar /> {highlight}</span>

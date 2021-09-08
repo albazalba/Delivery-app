@@ -9,9 +9,10 @@ const Searchbar = (props) => {
     return (
         <SearchbarContainer>
             <span className="searchbar-left">Veg only <Switch changeVegFilter={props.handleVegFilter} /></span>
-            <div className='search-icon'>
+            {/* <div className='search-icon'>
                   <BsSearch />    
-            </div>            
+            </div>             */}
+            <input name="Search" placeholder="Search item" value={props.searchItem} onChange={props.onSearch} />
         </SearchbarContainer>
     )
 }
@@ -34,6 +35,20 @@ color: ${TEXT_COLOR_LIGHT};
 }
 .search-icon{
     margin-right: 10px;
+}
+input{
+    border: 1px solid #cecaca;
+    padding: 4px;
+    color: #c5bfbf;
+    border-radius: 15px;
+    margin-right: 10px;
+    font-size: 10px;
+    &:focus{
+        border: none;
+    }
+    &:active{
+        border: none;
+    }
 }`;
 
 export default Searchbar

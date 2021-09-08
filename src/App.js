@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useContext} from 'react'
 import Navbar from './components/Navbar/Navbar'
 import Home from './pages/Home'
 import './index.css'
@@ -8,11 +8,18 @@ import LoginPage from './components/LoginPage/LoginPage'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { CartProvider } from 'react-use-cart'
 import data from './components/Items/data'
+import { AuthProvider } from './context/AuthContext'
+import Signup from './components/LoginPage/Signup'
+import PrivateRoute from './privateRoute'
+import { CartContext } from './context/CartContext'
 
 const App = () => {
+    // console.log(cart);
     const { items } = data;
     const [filteredItem, setFilteredItem] = useState(items)
-    const [cart , setCart] = useState([])
+    const [cart, setCart] = useContext(CartContext);
+    const [searchItem, setSearchitem] = useState('')
+    // const [cart , setCart] = useState([])
     const totalItems = cart.length;
     const itemTotal = cart.reduce((total, item) => total + item.price * item.cartCount, 0);
     const taxes = itemTotal * 0.12;
@@ -35,6 +42,11 @@ const App = () => {
         console.log("filteredItem",filteredItem);
         
     },[filteredItem])
+
+    const onSearch = (e) => {
+        setSearchitem(e.target.value)
+        console.log(searchItem);
+    }
 
     const addToCart = (item) => {
         const exist =cart.find((x) => x.id === item.id);
@@ -78,34 +90,41 @@ const App = () => {
         }
     }
   return (
-    <Router>
+     <CartProvider> 
+     <AuthProvider>
+        <Router>
         <div className='container'>
-          {/* <LoginPage /> */}
-          <CartProvider>
-            <Navbar />
-            <Switch>
-              <Route exact path='/home'>
-                <Home
-                filteredItem={filteredItem}
-                addToCart={addToCart}
-                handleCartReduce={handleCartReduce} />
-              </Route>
-              <Route path='/orders'>
-                <Orders 
-                cart={cart}
-                addToCart={addToCart}
-                handleCartReduce={handleCartReduce}
-                totalItems={totalItems}
-                itemTotal={itemTotal}
-                taxes={taxes}
-                subTotal={subTotal} />
-              </Route> 
-              <Route path='/account' component={Account} />
-            </Switch>
-          </CartProvider>
+            <Route path='/signup' component={Signup} />
+            <Route path='/login' component={LoginPage} />
+            <div>
+                <Navbar />
+                <Switch>
+                    <PrivateRoute exact path='/home'>
+                        <Home
+                        handleVegFilter={handleVegFilter}
+                        filteredItem={filteredItem}
+                        addToCart={addToCart}
+                        handleCartReduce={handleCartReduce}
+                        onSearch={onSearch}
+                        searchItem={searchItem} />
+                    </PrivateRoute>
+                    <PrivateRoute path='/orders'>
+                        <Orders 
+                        cart={cart}
+                        addToCart={addToCart}
+                        handleCartReduce={handleCartReduce}
+                        totalItems={totalItems}
+                        itemTotal={itemTotal}
+                        taxes={taxes}
+                        subTotal={subTotal} />
+                    </PrivateRoute> 
+                    <PrivateRoute path='/account' component={Account} />
+                    </Switch>
+            </div>    
         </div>
-    </Router>
-    
+        </Router>
+     </AuthProvider>
+     </CartProvider>
   )
 }
 
