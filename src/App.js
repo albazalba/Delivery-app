@@ -5,7 +5,7 @@ import './index.css'
 import Orders from './components/Orders/Orders'
 import Account from './components/Account/Account'
 import LoginPage from './components/LoginPage/LoginPage'
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
 import { CartProvider } from 'react-use-cart'
 import data from './components/Items/data'
 import { AuthProvider } from './context/AuthContext'
@@ -108,6 +108,7 @@ const App = () => {
                         onSearch={onSearch}
                         searchItem={searchItem} />
                     </PrivateRoute>
+                    <Redirect exact from="/" to="/home" />
                     <PrivateRoute path='/orders'>
                         <Orders 
                         cart={cart}
