@@ -1,8 +1,10 @@
 import React, {useState} from 'react'
 import styled from '@emotion/styled'
-import Img from '../../img/ArrowRight.png'
+import Img from '../../img/Me.jpg'
 import { useAuth } from '../../context/AuthContext'
 import { useHistory } from 'react-router-dom'
+import {BsChevronRight} from 'react-icons/bs'
+
 
 const Account = () => {
     const [error, setError] = useState("")
@@ -21,161 +23,161 @@ const Account = () => {
 
     return (
         <main>
-        <Cover />
-        <AccountPage>
+        <Cover>
                 <div className="profile-head">
-                    <img className="profile-image" src="https://static.toiimg.com/thumb/msid-76729750,width-1200,resizemode-4/76729750.jpg" alt="Profile" />
+                    <img className="profile-image" src="https://pbs.twimg.com/profile_images/1251864623256465408/2Rr5byMe.jpg" alt="Profile" />
                     <span className="profile-name">{currentUser.email}<br />
                     <span className="place">United Kingdom</span>
                     </span>
                 </div>
+        </Cover>        
+        <AccountPage>
                 <div className="profile-details">
-                    <span className="detail-heading">Profile Settings</span>
+                    <h4>Profile</h4>
                     <div className="profile-setting">
                         <a href="#">Bio</a>
-                        <img src={Img} alt="Change Bio"></img>
+                        <BsChevronRight className="profile-icon" />
                     </div>
                     <div className="profile-setting">
                         <a href="#">Send Notificarions</a>
-                        <img src={Img} alt="Change Bio"></img>
+                        <BsChevronRight className="profile-icon" />
                     </div>
                     <div className="profile-setting">
                         <a href="#">Theme</a>
-                        <img src={Img} alt="Change Bio"></img>
+                        <BsChevronRight className="profile-icon" />
                     </div>
-                </div>
-                <div className="profile-details">
-                    <span className="detail-heading">Account</span>
                     <div className="profile-setting">
                         <a href="#">Authentication</a>
-                        <img src={Img} alt="Change Bio"></img>
+                        <BsChevronRight className="profile-icon" />
                     </div>
                     <div className="profile-setting">
                         <a href="#">Language</a>
-                        <img src={Img} alt="Change Bio"></img>
+                        <BsChevronRight className="profile-icon" />
                     </div>
-                </div>
-                <div className="profile-details">
-                    <span className="detail-heading">Support</span>
                     <div className="profile-setting">
                         <a href="#">Call us</a>
-                        <img src={Img} alt="Change Bio"></img>
+                        <BsChevronRight className="profile-icon" />
                     </div>
                     <div className="profile-setting">
                         <a href="#">Feedback</a>
-                        <img src={Img} alt="Change Bio"></img>
-                    </div>
-                    <div className="profile-setting">
-                        <button onClick={handleLogout}>Logout</button>
+                        <BsChevronRight className="profile-icon" />
                     </div>
                 </div>
+                    <div className="btn-container">
+                        <button onClick={handleLogout}>Logout</button>
+                    </div>
             </AccountPage>
         </main>
     )
 }
 
 const Cover = styled.div`
-        top: 0;
-        width: 100%;
+        /* top: 0; */
+        position: relative;
+        width: 100vw;
         z-index: -1;
-        height: 180px;
-        background-image: linear-gradient(to right, #d31027, #ea384d);`
-
+        height: 350px;
+        background:white;
+        .profile-head{
+            position: absolute;
+            display: flex;
+            flex-flow: column;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            margin : auto ;
+            /* top: 20%; */
+            /* margin-left: 30px; */
+            /* margin-top: -50px; */
+            .profile-image{
+                width: 110px;
+                height: 100px;
+                border-radius: 50%;
+                border: 3px solid gray;
+                border-bottom: 0;
+                padding: 8px;
+            }
+            .profile-name{
+                font-weight: 700;
+                font-size: 15px;
+                margin-top: 10px;
+                color: black;
+                text-align:center;
+                margin-left: 10px;
+                line-height: 13px;
+                .place{
+                    font-size: 10px;
+                    font-weight: 400;
+                    text-align:center;
+                    opacity: .6;
+            
+                }
+            }
+        }
+`
 const AccountPage = styled.div`
     display: flex;
-    top: -20px;
+    top: -30px;
     flex-flow: column;
     width: 100%;
     height: 100%;
+    bottom: 0;
     border-top: 1px solid white;
-    border-top-left-radius: 30px;
-    border-top-right-radius: 30px;
+    box-shadow: 0px -40px 40px rgb(251 251 251);
+    border-top-left-radius: 40px;
+    border-top-right-radius: 40px;
     position: relative;
     background-color: white;
     padding-bottom: 40px;
-    .profile-head{
-        display: flex;
-        width: 100%;
-        top: 20%;
-        margin-left: 30px;
-        margin-top: -50px;
-        .profile-image{
-            width: 110px;
-            height: 100px;
-            border-radius: 50%;
-        }
-        .profile-name{
-            font-weight: 700;
-            font-size: 15px;
-            margin-top: 55px;
-            color: black;
-            text-align:center;
-            margin-left: 10px;
-            line-height: 13px;
-            .place{
-                font-size: 10px;
-                font-weight: 400;
-                text-align:center;
-                opacity: .6;
-        
-            }
-        }
-    }
     .profile-details{
         display: flex;
         flex-flow: column;
-        width: 100%;
-        margin-top: 30px;
-        margin-left: 8px;
-        .detail-heading{
-            font-size: 15px;
-            font-weight: 700;
-            text-transform: uppercase;
-            width: 100%;
-            margin-top: 10px;
-            margin-left: 3px;
-            padding-bottom: 10px;
-            color: black;
-            position: relative;
-            &::after{
-                content: "";
-                position: absolute;
-                width: 90%;
-                height: .5px;
-                bottom: 0;
-                opacity: .4;
-                background-color: gray;
-                left: 50%;
-                transform: translateX(-55%);
-
-            }       
+        max-width: 100vw;
+        bottom: 0;
+        margin: 20px 10px;
+        }
+        h4{
+            padding: 15px 15px;
+            font-size: 10px;
+            color: gray;
         }
         .profile-setting{
             display: flex;
             justify-content: space-between;
-            padding-top: 15px;
-            margin-left: 10px;
+            width: 100%;
+            padding: 20px 20px;
+            /* margin-left: 10px; */
             a{
                 text-decoration: none;
-                font-size: 13px;
-                font-weight: 400;
-                color: #b3b2b2;
+                font-size: 12px;
+                font-weight: 600;
+                color: black;
             }
-            img{
-                height: 13px;
-                color: #b3b2b2;
-                margin-right: 35px;
+            .profile-icon{
+                font-size: 12px;
             }
-            button{
+        }        
+        .btn-container{
+            display: flex;
+            justify-content: center;
+            max-width: 100vw;
+            padding: 10px;
+            button {
                 border: none;
                 background-color: #ea384d;
                 color: white;
                 padding: 9px 16px;
-                width: 100%;
-                margin-right: 35px;
+                justify-content: c;
+                width: 150px;
+                /* margin-right: 35px; */
+                
             }
-        }        
+        }   
     }
-`;
+`
 
 export default Account
