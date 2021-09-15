@@ -148,7 +148,7 @@ const AccountPage = styled.div`
         .profile-setting{
             display: flex;
             justify-content: space-between;
-            width: 100%;
+            /* width: 100%; */
             padding: 20px 20px;
             /* margin-left: 10px; */
             a{
