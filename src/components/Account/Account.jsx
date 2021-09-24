@@ -77,7 +77,8 @@ const Cover = styled.div`
         width: 100vw;
         z-index: -1;
         height: 350px;
-        background:white;
+        background: url("https://thumbs.dreamstime.com/z/food-background-burgers-hand-drawn-illustration-your-design-wallpaper-menu-textile-food-background-burgers-hand-drawn-129275575.jpg");
+        background-size: cover;
         .profile-head{
             position: absolute;
             display: flex;
@@ -127,7 +128,7 @@ const AccountPage = styled.div`
     height: 100%;
     bottom: 0;
     border-top: 1px solid white;
-    box-shadow: 0px -40px 40px rgb(251 251 251);
+    box-shadow: 0px -5px 10px rgb(185 179 170);
     border-top-left-radius: 40px;
     border-top-right-radius: 40px;
     position: relative;

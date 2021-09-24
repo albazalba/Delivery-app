@@ -12,25 +12,25 @@ const Items = ( {filteredItem, handleVegFilter, addToCart, handleCartReduce, onS
             <Searchbar handleVegFilter={handleVegFilter} onSearch={onSearch} searchItem={searchItem} />
             <ItemsContainer>
                 <h3>Best sellers</h3>
-                    {filteredItem.filter((item) => {
+                    {filteredItem?.length && filteredItem.filter((item) => {
                         if(searchItem == "") {
                             return item
                         } else if(item.name.toLowerCase().includes(searchItem.toLowerCase())) {
                             return item
                         }
-                    }).map((item) => (
-                        <ItemCard key={item.id} 
-                        isVeg={item.isVeg}
-                        highlight={item.highlight}
-                        itemName={item.name}
-                        price={item.price}
-                        desc={item.description}
-                        img={item.image}
-                        addToCart={()=>addToCart(item)}
-                        cartCount={item.cartCount}
-                        handleCartReduce={() => handleCartReduce(item)}
-                         />
-                    ))}
+                        }).map((item) => (
+                            <ItemCard key={item.id} 
+                            isVeg={item.isVeg}
+                            highlight={item.highlight}
+                            itemName={item.name}
+                            price={item.price}
+                            desc={item.description}
+                            img={item.image}
+                            addToCart={()=>addToCart(item)}
+                            cartCount={item.cartCount}
+                            handleCartReduce={() => handleCartReduce(item)}
+                            />
+                    )) }
                     
                     
             </ItemsContainer>

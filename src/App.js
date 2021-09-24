@@ -12,11 +12,36 @@ import { AuthProvider } from './context/AuthContext'
 import Signup from './components/LoginPage/Signup'
 import PrivateRoute from './privateRoute'
 import { CartContext } from './context/CartContext'
+import MapPage from './components/MapPage/MapPage'
+import PropagateLoader from "react-spinners/PropagateLoader";
+import styled from '@emotion/styled'
+import {
+    ApolloClient,
+    InMemoryCache,
+    ApolloProvider,
+    useQuery,
+    gql
+} from "@apollo/client";
+
+
+
+const GET_MY_ITEMS = gql`
+query FetchItem {
+    items {
+      id
+      name
+      description
+      price
+      image
+      isVeg
+    }
+  }`;
 
 const App = () => {
-    // console.log(cart);
-    const { items } = data;
-    const [filteredItem, setFilteredItem] = useState(items)
+    const { loading, error, data } = useQuery(GET_MY_ITEMS);
+    console.log("datas",data);
+    // const { items } = data;
+    const [filteredItem, setFilteredItem] = useState([]);
     const [cart, setCart] = useContext(CartContext);
     const [searchItem, setSearchitem] = useState('')
     // const [cart , setCart] = useState([])
@@ -26,11 +51,15 @@ const App = () => {
     const subTotal = itemTotal + taxes;
     
     const handleVegFilter = (event) => { 
-        if(event.target.checked){
-            const vegFilter = items.filter((item) => item.isVeg)
-            setFilteredItem(vegFilter)
-        }else{
-            setFilteredItem(items)
+        const items = data.items
+        if(items.length){
+            if(event.target.checked){
+                const vegFilter = items.filter((item) => item.isVeg)
+                setFilteredItem(vegFilter)
+            } else {
+                const allItems = items
+                setFilteredItem(allItems)
+            }
         }
     }
 
@@ -42,6 +71,11 @@ const App = () => {
         console.log("filteredItem",filteredItem);
         
     },[filteredItem])
+    
+    useEffect(() => {
+        console.log("filteredItem",filteredItem);
+        setFilteredItem(data?.items)
+    },[data])
 
     const onSearch = (e) => {
         setSearchitem(e.target.value)
@@ -89,8 +123,12 @@ const App = () => {
             );
         }
     }
-  return (
-     <CartProvider> 
+  if(loading){
+     return <LoadingPage>
+        <PropagateLoader loading={true} color="#ea384d" size={15} />
+     </LoadingPage>
+  }  
+  return ( 
      <AuthProvider>
         <Router>
         <div className='container'>
@@ -109,6 +147,9 @@ const App = () => {
                         searchItem={searchItem} />
                     </PrivateRoute>
                     <Redirect exact from="/" to="/home" />
+                    <PrivateRoute path='/map'>
+                        <MapPage />
+                    </PrivateRoute> 
                     <PrivateRoute path='/orders'>
                         <Orders 
                         cart={cart}
@@ -125,9 +166,17 @@ const App = () => {
         </div>
         </Router>
      </AuthProvider>
-     </CartProvider>
   )
 }
+
+const LoadingPage = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    background: white;
+`
 
 export default App
 

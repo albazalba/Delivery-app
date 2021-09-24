@@ -9,11 +9,14 @@ import cartActive from '../../img/cartActive.svg'
 import cartInactive from '../../img/cartInactive.svg'
 import accountActive from '../../img/accountActive.svg'
 import accountInactive from '../../img/accountInactive.svg'
+import location from '../../img/location.svg'
+import locationActive from '../../img/locationActive.svg'
 import { textLight } from '../../Styles/themes'
 
 const Navbar = () => {
     let homeMatch = useRouteMatch("/home");
     let cartMatch =useRouteMatch("/orders");
+    let locationMatch = useRouteMatch("/map")
     let accountMatch = useRouteMatch("/account")
     console.log(homeMatch);
     console.log(cartMatch)
@@ -24,6 +27,13 @@ const Navbar = () => {
             <div className='home'>
             <img className="icon" src={homeMatch ? homeIcon : inactiveHomeIcon} />
                 <span>Home</span>
+            </div>
+            </NavLink>
+            <NavLink to='/map' style={{textDecoration:'none', color:'grey' }} 
+            activeStyle={{fontWeight: "bold", color: "#EE5046" }}>
+            <div className='home'>
+            <img className="icon" src={locationMatch ? locationActive : location} />
+                <span>Map</span>
             </div>
             </NavLink>
             

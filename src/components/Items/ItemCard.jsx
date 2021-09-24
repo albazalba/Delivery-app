@@ -19,7 +19,7 @@ const ItemCard = (props) => {
             <div className='left'>
                 <span className='highlight'><img src={isVeg ? vegIcon : nonVegIcon} /> <AiFillStar /> {highlight}</span>
                 <h4>{itemName}</h4>
-                <span className="price">{price}</span>
+                <span className="price">${price}</span>
                 <span className="desc">{desc}</span>
             </div>
             <div className="right">
