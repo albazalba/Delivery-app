@@ -21,7 +21,7 @@ width: 100%;
 height: 40px;
 display: flex;
 justify-content: space-between;
-margin-top: 10px;
+margin-top: 5px;
 background-color: white;
 align-items: center;
 color: ${TEXT_COLOR_LIGHT};

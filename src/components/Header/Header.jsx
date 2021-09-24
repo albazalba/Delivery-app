@@ -9,7 +9,7 @@ const Header = () => {
     return (
         <HeaderContainer>
             <div className='heading-section'>
-                <h1>Burger king</h1>
+                <h1>Burger joint</h1>
                 <span className='address'>RMV 2nd Stage, Sanjay Nagar</span><br />
                 <span className='category'>America, Fast Food</span>
                 <div className="sidestick-container">

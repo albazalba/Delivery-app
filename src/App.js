@@ -125,7 +125,12 @@ const App = () => {
     }
   if(loading){
      return <LoadingPage>
-        <PropagateLoader loading={true} color="#ea384d" size={15} />
+        <div>
+            <h2 style={{color:"#ea384d", padding:"15px"}}>BURGER JOINT</h2>
+        </div>
+        <div>
+            <PropagateLoader loading={true} color="#ea384d" size={15} />    
+        </div>
      </LoadingPage>
   }  
   return ( 
@@ -171,6 +176,7 @@ const App = () => {
 
 const LoadingPage = styled.div`
     display: flex;
+    flex-flow: column;
     justify-content: center;
     align-items: center;
     height: 100vh;

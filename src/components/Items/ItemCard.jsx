@@ -44,6 +44,9 @@ const ItemCardContainer = styled.div`
     justify-content: space-between;
     position: relative;
     padding: 15px 15px;
+    &:last-child{
+        padding-bottom: 50px;
+    }
     &::after{
         content: "";
         bottom: 0;

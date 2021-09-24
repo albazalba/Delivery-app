@@ -19,7 +19,7 @@ const Items = ( {filteredItem, handleVegFilter, addToCart, handleCartReduce, onS
                             return item
                         }
                         }).map((item) => (
-                            <ItemCard key={item.id} 
+                            <ItemCard className="last-child" key={item.id} 
                             isVeg={item.isVeg}
                             highlight={item.highlight}
                             itemName={item.name}
@@ -30,9 +30,7 @@ const Items = ( {filteredItem, handleVegFilter, addToCart, handleCartReduce, onS
                             cartCount={item.cartCount}
                             handleCartReduce={() => handleCartReduce(item)}
                             />
-                    )) }
-                    
-                    
+                    )) }         
             </ItemsContainer>
         </>
     )
@@ -42,12 +40,15 @@ const ItemsContainer = styled.div`
     bottom: 50px;
     background-color: white;
     min-height: 100% ;
-    margin-top: 10px;
+    margin-top: 5px;
     h3{
         color: $text-color-light ;
         font-size: 14px;
         margin-left: 10px;
         padding-top: 10px;
+    }
+    .last-child{
+        padding-bottom: 20px;
     }`;
 
 

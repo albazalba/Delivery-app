@@ -170,6 +170,7 @@ const AccountPage = styled.div`
             button {
                 border: none;
                 background-color: #ea384d;
+                border-radius: 20px;
                 color: white;
                 padding: 9px 16px;
                 justify-content: c;
