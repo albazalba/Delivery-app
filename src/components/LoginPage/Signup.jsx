@@ -27,7 +27,7 @@ async function handleSubmit(e) {
             setError('')
             await signup(email, password)
             toast("Account has been created")
-            props.history.push("/login")
+            props.history.push("/home")
         }catch {
             setError('Failed to create an account')
         } 

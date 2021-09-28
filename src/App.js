@@ -5,7 +5,7 @@ import './index.css'
 import Orders from './components/Orders/Orders'
 import Account from './components/Account/Account'
 import LoginPage from './components/LoginPage/LoginPage'
-import { HashRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
+import { HashRouter as Router, Route, Switch, Redirect, useLocation } from 'react-router-dom'
 import { CartProvider } from 'react-use-cart'
 import data from './components/Items/data'
 import { AuthProvider } from './context/AuthContext'
@@ -16,6 +16,8 @@ import MapPage from './components/MapPage/MapPage'
 import PropagateLoader from "react-spinners/PropagateLoader";
 import styled from '@emotion/styled'
 import { ToastContainer} from 'react-toastify';
+import { useAuth } from '../src/context/AuthContext'
+import { withRouter } from "react-router-dom";
 
 import {
     ApolloClient,
@@ -41,7 +43,7 @@ query FetchItem {
 
 const App = () => {
     const { loading, error, data } = useQuery(GET_MY_ITEMS);
-    console.log("datas",data);
+    
     // const { items } = data;
     const [filteredItem, setFilteredItem] = useState([]);
     const [cart, setCart] = useContext(CartContext);
@@ -51,6 +53,8 @@ const App = () => {
     const itemTotal = cart.reduce((total, item) => total + item.price * item.cartCount, 0);
     const taxes = itemTotal * 0.12;
     const subTotal = itemTotal + taxes;
+    const {currentUser} = useAuth()
+    // console.log(location);
     
     const handleVegFilter = (event) => { 
         const items = data.items
@@ -135,15 +139,15 @@ const App = () => {
         </div>
      </LoadingPage>
   }  
-  return ( 
-     <AuthProvider>
-        <Router>
-        <div className='container'>
+  console.log(currentUser);
+  return (  
+     <Router>
             <Route path='/signup' component={Signup} />
             <Route path='/login' component={LoginPage} />
             <ToastContainer />
-            <div>
-                <Navbar />
+    
+         <div>
+                { currentUser && <Navbar /> }
                 <Switch>
                     <PrivateRoute exact path='/home'>
                         <Home
@@ -170,10 +174,9 @@ const App = () => {
                     </PrivateRoute> 
                     <PrivateRoute path='/account' component={Account} />
                     </Switch>
-            </div>    
-        </div>
+            </div>   
         </Router>
-     </AuthProvider>
+
   )
 }
 
@@ -187,6 +190,6 @@ const LoadingPage = styled.div`
     background: white;
 `
 
-export default App
+export default App;
 
 

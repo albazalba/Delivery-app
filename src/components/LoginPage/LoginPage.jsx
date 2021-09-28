@@ -6,8 +6,8 @@ import {Link, useHistory} from 'react-router-dom'
 import { toast } from 'react-toastify';
 
 const LoginPage = () => {
-    const emailRef = useRef()
-    const passwordRef =useRef()
+    const [email, setEmail] = useState("")
+    const [password, setPassword] =useState("")
     const { login } = useAuth()
     const [error, setError] = useState('')
     const [loading, setLoading] = useState(false)
@@ -19,7 +19,7 @@ async function handleSubmit(e) {
     try {
         setLoading(true)
         setError('')
-        await login(emailRef.current.value, passwordRef.current.value, )
+        await login(email, password )
         toast("Logged in")
         history.push("/home")
     }catch {
@@ -37,8 +37,8 @@ async function handleSubmit(e) {
             </div>
             {error && <span>{error}</span>}
             <form className="input-part" onSubmit={handleSubmit}>
-                <input placeholder="E-mail" type="text" ref={emailRef} />
-                <input placeholder="Password" type="password" ref={passwordRef} />
+                <input placeholder="E-mail" type="text" onChange={(e) => setEmail(e.target.value)}/>
+                <input placeholder="Password" type="password" onChange={(e) => setPassword(e.target.value)} />
                 <button className="btn" type="submit">Login</button>
             </form>
             <div className="signup">

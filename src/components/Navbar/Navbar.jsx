@@ -23,11 +23,11 @@ const Navbar = () => {
     return (
         <NavbarContainer>
             <NavLink to='/home' style={{textDecoration:'none', color:'grey' }} 
-            activeStyle={{fontWeight: "bold", color: "#EE5046" }}>
-            <div className='home'>
-            <img className="icon" src={homeMatch ? homeIcon : inactiveHomeIcon} />
-                <span>Home</span>
-            </div>
+                activeStyle={{fontWeight: "bold", color: "#EE5046" }}>
+                <div className='home'>
+                <img className="icon" src={homeMatch ? homeIcon : inactiveHomeIcon} />
+                    <span>Home</span>
+                </div>
             </NavLink>
             <NavLink to='/map' style={{textDecoration:'none', color:'grey' }} 
             activeStyle={{fontWeight: "bold", color: "#EE5046" }}>
