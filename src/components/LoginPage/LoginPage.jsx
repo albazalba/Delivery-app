@@ -3,6 +3,7 @@ import React, { useRef, useState } from 'react'
 import Arrow from '../../img/ArrowRight.png'
 import { useAuth } from '../../context/AuthContext'
 import {Link, useHistory} from 'react-router-dom'
+import { toast } from 'react-toastify';
 
 const LoginPage = () => {
     const emailRef = useRef()
@@ -19,6 +20,7 @@ async function handleSubmit(e) {
         setLoading(true)
         setError('')
         await login(emailRef.current.value, passwordRef.current.value, )
+        toast("Logged in")
         history.push("/home")
     }catch {
         setError('Failed to sign in')

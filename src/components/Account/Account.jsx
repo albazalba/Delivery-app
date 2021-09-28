@@ -25,7 +25,7 @@ const Account = () => {
         <main>
         <Cover>
                 <div className="profile-head">
-                    <img className="profile-image" src="https://pbs.twimg.com/profile_images/1251864623256465408/2Rr5byMe.jpg" alt="Profile" />
+                    <img className="profile-image" src="https://st2.depositphotos.com/1007566/11541/v/950/depositphotos_115416492-stock-illustration-avatar-business-man-vector-graphic.jpg" alt="Profile" />
                     <span className="profile-name">{currentUser.email}<br />
                     <span className="place">United Kingdom</span>
                     </span>
@@ -173,9 +173,8 @@ const AccountPage = styled.div`
                 border-radius: 20px;
                 color: white;
                 padding: 9px 16px;
-                justify-content: c;
+                justify-content: center;
                 width: 150px;
-                /* margin-right: 35px; */
                 
             }
         }   

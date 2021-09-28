@@ -3,29 +3,36 @@ import React, { useRef, useState } from 'react'
 import Arrow from '../../img/ArrowRight.png'
 import { useAuth } from '../../context/AuthContext'
 import {Link} from 'react-router-dom'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-const Signup = () => {
-    const emailRef = useRef()
-    const passwordRef =useRef()
-    const passwordConfirmRef = useRef()
+const Signup = (props) => {
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
+    const [passwordConfirmed, setPasswordConfirmed] = useState("")
+    const [message, setMessage] = useState("")
     const { signup } = useAuth()
     const [error, setError] = useState('')
     const [loading, setLoading] = useState(false)
 
+
 async function handleSubmit(e) {
     e.preventDefault()
 
-    if (passwordRef.current.value !== passwordConfirmRef.current.value) {
-        return setError('passwords do not mathc')
+    if (password !== passwordConfirmed) {
+        return setError('passwords do not match')
+    } else {
+        try {
+            setLoading(true)
+            setError('')
+            await signup(email, password)
+            toast("Account has been created")
+            props.history.push("/login")
+        }catch {
+            setError('Failed to create an account')
+        } 
+        setLoading(false)
     }
-    try {
-        setLoading(true)
-        setError('')
-        await signup(emailRef.current.value, passwordRef.current.value, passwordConfirmRef.current.value)
-    }catch {
-        setError('Failed to create an account')
-    } 
-    setLoading(false)
 }
 
     return (
@@ -37,13 +44,14 @@ async function handleSubmit(e) {
             </div>
             {error && <div className="error-container"><span className="error">{error}</span></div>}
             <form className="input-part" onSubmit={handleSubmit}>
-                <input placeholder="E-mail" type="text" ref={emailRef} />
-                <input placeholder="Password" type="password" ref={passwordRef} />
-                <input placeholder="Confirm password" type="password" ref={passwordConfirmRef}  />
+                <input placeholder="E-mail" type="text" onChange={(e) => setEmail(e.target.value)} />
+                <input placeholder="Password" type="password" onChange={(e) => setPassword(e.target.value)} />
+                <input placeholder="Confirm password" type="password" onChange={(e) => setPasswordConfirmed(e.target.value)}  />
                 <button className="btn" type="submit">Continue</button>
             </form>     
             <div className="login">Already have an accoount? <Link to='/login'>Login</Link></div> 
-            </PageContainer>
+            <ToastContainer />
+        </PageContainer>
     )
 }
 

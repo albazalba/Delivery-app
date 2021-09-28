@@ -19,7 +19,7 @@ const Items = ( {filteredItem, handleVegFilter, addToCart, handleCartReduce, onS
                             return item
                         }
                         }).map((item) => (
-                            <ItemCard className="last-child" key={item.id} 
+                            <ItemCard key={item.id} 
                             isVeg={item.isVeg}
                             highlight={item.highlight}
                             itemName={item.name}

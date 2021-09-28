@@ -15,6 +15,8 @@ import { CartContext } from './context/CartContext'
 import MapPage from './components/MapPage/MapPage'
 import PropagateLoader from "react-spinners/PropagateLoader";
 import styled from '@emotion/styled'
+import { ToastContainer} from 'react-toastify';
+
 import {
     ApolloClient,
     InMemoryCache,
@@ -139,6 +141,7 @@ const App = () => {
         <div className='container'>
             <Route path='/signup' component={Signup} />
             <Route path='/login' component={LoginPage} />
+            <ToastContainer />
             <div>
                 <Navbar />
                 <Switch>

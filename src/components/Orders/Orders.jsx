@@ -75,7 +75,7 @@ const Orders = ( {cart, addToCart, handleCartReduce, totalItems, itemTotal, taxe
 }
 
 const OrderPage = styled.div`
-    height: 92vh;
+    height: 94vh;
     width: 100wv;
     position: relative;
     .page-header{

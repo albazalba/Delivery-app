@@ -122,9 +122,12 @@ const MenuContainer = styled.div`
 
 const ButtonContainer = styled.div`
     position: fixed;
-    display: flex;
+    left: 50%;
+    bottom: 65px;
+    transform: translateX(-50%);
+    /* display: flex;
     justify-content: center;
-    width: 100%;
+    width: 100%; */
     bottom: 60px;
     z-index: 2;
     .btn-close, .btn-open{
