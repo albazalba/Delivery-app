@@ -63,7 +63,7 @@ const NavbarContainer = styled.div`
     bottom: 0;
     width: 100%;
     position: fixed;
-    height: 50px;
+    height: 9vh;
     background-color: white;
     font-size: 10px;
     list-style: none;

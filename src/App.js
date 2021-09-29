@@ -49,10 +49,12 @@ const App = () => {
     const [cart, setCart] = useContext(CartContext);
     const [searchItem, setSearchitem] = useState('')
     // const [cart , setCart] = useState([])
-    const totalItems = cart.length;
-    const itemTotal = cart.reduce((total, item) => total + item.price * item.cartCount, 0);
-    const taxes = itemTotal * 0.12;
-    const subTotal = itemTotal + taxes;
+    var totalItems = cart.length;
+    var itemTotal = Math.round(cart.reduce((total, item) => total + item.price * item.cartCount, 0)).toFixed(2);
+    console.log(itemTotal);
+    var taxAmount = itemTotal * 0.12;
+    var taxes = Math.round(taxAmount).toFixed(2);
+    var subTotal = parseFloat(itemTotal) + parseFloat(taxes);
     const {currentUser} = useAuth()
     // console.log(location);
     

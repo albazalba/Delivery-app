@@ -43,7 +43,7 @@ async function handleSubmit(e) {
             </form>
             <div className="signup">
                 <div>Need an account? <Link to='/Signup'>Sign up</Link></div>    
-                <Link to='/forgotpassword'><div> Forgot password</div></Link> 
+                {/* <Link to='/forgotpassword'><div> Forgot password</div></Link>  */}
             </div>
             </PageContainer>
     )
@@ -75,13 +75,17 @@ const PageContainer = styled.div`
    .input-part{
        background-color: white;
        width: 100%;
+       display: flex;
+       flex-flow: column;
+       justify-content: center;
+       align-items: center;
        input{
         outline: 0;
         border-width: 0 0 1px;
         height: 50px;
         width: 90%;
         font-size: 13px;
-        margin-left: 10px;
+        /* margin-left: 10px; */
         margin-top: 20px;
         &:focus{
             border-color: green;
@@ -89,7 +93,7 @@ const PageContainer = styled.div`
        }
        .btn{
            width: 90%;
-           margin-left: 10px;
+           /* margin-left: 10px; */
            font-size: 15px;
            height: 50px;
            margin-top: 20px;
